@@ -1,12 +1,5 @@
-.side-bar {
-  background-color: #1f1f3d;
-  height: 100%;
-  width: 250px;
-  position: fixed; /* Fixed Sidebar (stay in place on scroll) */
-  z-index: 1; /* Stay on top */
-  top: 0; /* Stay at the top */
-  left: 0;
-  overflow-x: hidden; /* Disable horizontal scroll */
+body {
+  font-family: "Open Sans", sans-serif;
 }
 
 .main-content-box {
@@ -26,7 +19,42 @@
   background-color: #eaeaf4;
 }
 
+.side-bar {
+  background-color: #1f1f3d;
+  height: 100%;
+  width: 250px;
+  position: fixed; /* Fixed Sidebar (stay in place on scroll) */
+  z-index: 1; /* Stay on top */
+  top: 0; /* Stay at the top */
+  left: 0;
+  overflow-x: hidden; /* Disable horizontal scroll */
+}
+
 .side-bar > h1 {
+  font-size: x-large;
+  font-weight: bold;
   color: #e9e9f3;
   margin: 20px;
+}
+
+.side-bar .filter-box {
+  border-style: solid;
+  border-left: unset;
+  border-right: unset;
+  border-color: #353567;  
+}
+
+.side-bar .filter-box > h2 {
+  font-size: medium;
+  color: #bfbfdd;
+  margin: 20px;
+}
+
+.side-bar .filter-box > button {
+  font-size: larger;
+  margin: 20px;
+  padding: 10px;
+  color: #e9e9f3;
+  background-color: #5356a4;
+  border: unset;
 }
