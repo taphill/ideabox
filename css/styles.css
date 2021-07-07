@@ -16,7 +16,13 @@ body {
 
 .main-content-box .ideas-box {
   flex: 1 1 auto;
+  display: flex;
   background-color: #eaeaf4;
+}
+
+.idea-card {
+  display: flex;
+  background-color: red;
 }
 
 .side-bar {
