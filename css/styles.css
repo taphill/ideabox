@@ -51,7 +51,8 @@ label {
   font-size: x-large;
   font-weight: bold;
   color: #e9e9f3;
-  margin: 20px;
+  margin: 1.5rem;
+  margin-left: 1rem;
 }
 
 .side-bar .filter-box {
@@ -65,14 +66,14 @@ label {
   font-size: medium;
   font-weight: bold;
   color: #bfbfdd;
-  margin: 20px;
+  margin: 1rem;
 }
 
 .side-bar .filter-box > button {
   font-size: larger;
-  margin: 20px;
-  padding: 10px;
-  width: 210px;
+  margin: 1rem;
+  padding: 0.5rem;
+  width: 14rem;
   color: #e9e9f3;
   background-color: #5356a4;
   border: unset;
