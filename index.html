@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>IdeaBox</title>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:bold">
+  <link rel="stylesheet" href="css/fonts.css">
   <link rel="stylesheet" href="css/normalize.css">
   <link rel="stylesheet" href="css/styles.css">
 </head>
@@ -22,12 +22,18 @@
   <section class="main-content-box">
     <div class="form-box">
       <form>
-        <label for="title">Title</label><br>
-        <input type="text" id="title" title="title">
-        <label for="body">Body</label><br>
-        <input type="text" id="body" body="body">
+        <div class="form-group">
+          <label for="title">Title</label>
+          <input type="text" id="title" title="title">
+        </div>
+        <div class="form-group">
+          <label for="body">Body</label>
+          <input type="text" id="body" body="body">
+        </div>
+        <div class="form-group">
+          <button class="save-form" type="submit">Save</button>
+        </div>
       </form>
-      <button class="save-form">Save</button>
     </div>
     <div class="ideas-box">
       <div class="idea-card" id="card-one">

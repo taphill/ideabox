@@ -1,8 +1,21 @@
+:root {
+  --side-bar-width: 16rem;
+}
+
 body {
   font-family: "Open Sans", sans-serif;
 }
 
+label {
+  display: block;
+  margin-bottom: .25rem;
+  font-weight: bolder;
+  font-size: small;
+  color: #1f1f3d;
+}
+
 .main-content-box {
+  margin-left: var(--side-bar-width);
   height: 100vh;
   width: 100%;
   display:flex;
@@ -16,19 +29,17 @@ body {
 
 .main-content-box .ideas-box {
   flex: 1 1 auto;
-  display: flex;
   background-color: #eaeaf4;
 }
 
-.idea-card {
-  display: flex;
-  background-color: red;
+.form-group {
+  margin: 1rem;
 }
 
 .side-bar {
   background-color: #1f1f3d;
   height: 100%;
-  width: 250px;
+  width: var(--side-bar-width);
   position: fixed; /* Fixed Sidebar (stay in place on scroll) */
   z-index: 1; /* Stay on top */
   top: 0; /* Stay at the top */
@@ -52,6 +63,7 @@ body {
 
 .side-bar .filter-box > h2 {
   font-size: medium;
+  font-weight: bold;
   color: #bfbfdd;
   margin: 20px;
 }
@@ -60,6 +72,7 @@ body {
   font-size: larger;
   margin: 20px;
   padding: 10px;
+  width: 210px;
   color: #e9e9f3;
   background-color: #5356a4;
   border: unset;
