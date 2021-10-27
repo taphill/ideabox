@@ -2,6 +2,11 @@
   --side-bar-width: 16rem;
 }
 
+::placeholder {
+  color: #5356a4;
+  padding-left: 0.5rem;
+}
+
 body {
   font-family: "Open Sans", sans-serif;
 }
@@ -16,17 +21,56 @@ label {
 
 input {
   width: 100%;
-  border-style: solid;
-  border-radius: 0.1rem;
-  border-color: #5356a4;
 }
 
 #title {
   line-height: 250%;
+  border-style: solid;
+  border-radius: 0.2rem;
+  border-color: #5356a4;
 }
 
 #body {
   line-height: 600%;
+  border-style: solid;
+  border-radius: 0.2rem;
+  border-color: #5356a4;
+}
+
+#search {
+  border: unset;
+}
+
+.save-form-button {
+  border: solid;
+  border-color: #5356a4;
+  border-radius: 0.2rem;
+  font-size: larger;
+  font-weight: bold;
+  padding: 1rem;
+  width: 102%;
+  color: #e9e9f3;
+  background-color: #1f1f3d;
+}
+
+
+.search-bar {
+  display: flex;
+  height: 100%;
+  width: 102%;
+  border: solid;
+  border-radius: 0.2rem;
+  border-color: #5356a4;
+}
+
+.search-button {
+  border: unset;
+  width: 3rem;
+  background-color: #1f1f3d;
+}
+
+.search-image {
+  margin: 0.2rem;
 }
 
 .container {
@@ -57,16 +101,6 @@ input {
 .form-group {
   margin: 1rem;
   width: 50%;
-}
-
-.save-form-button {
-  border: unset;
-  font-size: larger;
-  font-weight: bold;
-  padding: 1rem;
-  width: 102%;
-  color: #e9e9f3;
-  background-color: #1f1f3d;
 }
 
 .side-bar {
