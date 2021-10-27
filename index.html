@@ -12,37 +12,39 @@
 </head>
 
 <body>
-  <section class="side-bar">
-    <h1>IdeaBox</h1>
-    <div class="filter-box">
-      <h2>Filter Starred Ideas</h2>
-      <button class="show-starred-ideas">Show Starred Ideas</button>
-    </div>
-  </section>
-  <section class="main-content-box">
-    <div class="form-box">
-      <form>
-        <div class="form-group">
-          <label for="title">Title</label>
-          <input type="text" id="title" title="title">
-        </div>
-        <div class="form-group">
-          <label for="body">Body</label>
-          <input type="text" id="body" body="body">
-        </div>
-        <div class="form-group">
-          <button class="save-form" type="submit">Save</button>
-        </div>
-      </form>
-    </div>
-    <div class="ideas-box">
-      <div class="idea-card" id="card-one">
-        <div class="idea-card-header"></div>
-        <div class="idea-card-body"></div>
-        <div class="idea-card-footer"></div>
+  <div class="container">
+    <section class="side-bar">
+      <h1>IdeaBox</h1>
+      <div class="filter">
+        <h2>Filter Starred Ideas</h2>
+        <button class="show-starred-ideas">Show Starred Ideas</button>
       </div>
-    </div>
-  </section>
+    </section>
+    <section class="main-content-box">
+      <!-- <div class="form-box"> -->
+        <form class="form-box">
+          <div class="form-group">
+            <label for="title">Title</label>
+            <input type="text" id="title" title="title">
+          </div>
+          <div class="form-group">
+            <label for="body">Body</label>
+            <input type="text" id="body" body="body">
+          </div>
+          <div class="form-group">
+            <button class="save-form-button" type="submit">Save</button>
+          </div>
+        </form>
+      <!-- </div> -->
+      <div class="ideas-box">
+        <div class="idea-card" id="card-one">
+          <div class="idea-card-header"></div>
+          <div class="idea-card-body"></div>
+          <div class="idea-card-footer"></div>
+        </div>
+      </div>
+    </section>
+  </div>
 </body>
 
 </html>

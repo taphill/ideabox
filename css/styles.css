@@ -8,43 +8,71 @@ body {
 
 label {
   display: block;
-  margin-bottom: .25rem;
+  margin-bottom: 0.5rem;
   font-weight: bolder;
-  font-size: small;
+  font-size: large;
   color: #1f1f3d;
 }
 
-.main-content-box {
-  margin-left: var(--side-bar-width);
-  height: 100vh;
+input {
   width: 100%;
-  display:flex;
-  flex-direction:column;
+  border-style: solid;
+  border-radius: 0.1rem;
+  border-color: #5356a4;
 }
 
-.main-content-box .form-box {
-  flex: 0 1 auto;
+#title {
+  line-height: 250%;
+}
+
+#body {
+  line-height: 600%;
+}
+
+.container {
+  display: flex;
+  margin: auto -1rem 1rem;
+}
+
+.main-content-box {
+  display:flex;
+  flex-direction:column;
+  height: 100vh;
+  width: 100vw;
+}
+
+.form-box {
+  display:flex;
+  flex-direction:column;
+  align-items: center;
+  padding: 0.8rem;
   background-color: #a9aad2;
 }
 
-.main-content-box .ideas-box {
+.ideas-box {
   flex: 1 1 auto;
   background-color: #eaeaf4;
 }
 
 .form-group {
   margin: 1rem;
+  width: 50%;
+}
+
+.save-form-button {
+  border: unset;
+  font-size: larger;
+  font-weight: bold;
+  padding: 1rem;
+  width: 102%;
+  color: #e9e9f3;
+  background-color: #1f1f3d;
 }
 
 .side-bar {
+  display: flex;
+  flex-direction: column;
   background-color: #1f1f3d;
-  height: 100%;
-  width: var(--side-bar-width);
-  position: fixed; /* Fixed Sidebar (stay in place on scroll) */
-  z-index: 1; /* Stay on top */
-  top: 0; /* Stay at the top */
-  left: 0;
-  overflow-x: hidden; /* Disable horizontal scroll */
 }
 
 .side-bar > h1 {
@@ -52,26 +80,28 @@ label {
   font-weight: bold;
   color: #e9e9f3;
   margin: 1.5rem;
-  margin-left: 1rem;
+  margin-left: 2rem;
 }
 
-.side-bar .filter-box {
+.side-bar .filter {
   border-style: solid;
   border-left: unset;
   border-right: unset;
   border-color: #353567;  
 }
 
-.side-bar .filter-box > h2 {
+.side-bar .filter > h2 {
   font-size: medium;
   font-weight: bold;
   color: #bfbfdd;
-  margin: 1rem;
+  margin: 2rem;
+  margin-bottom: 0.5rem;
 }
 
-.side-bar .filter-box > button {
+.side-bar .filter > button {
   font-size: larger;
-  margin: 1rem;
+  margin: 2rem;
+  margin-right: 1rem;
   padding: 0.5rem;
   width: 14rem;
   color: #e9e9f3;
