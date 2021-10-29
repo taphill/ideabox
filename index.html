@@ -12,28 +12,28 @@
 </head>
 
 <body>
-  <div class="container">
+  <div class="document-container">
     <section class="side-bar">
       <h1>IdeaBox</h1>
-      <div class="filter">
+      <section class="filter-ideas">
         <h2>Filter Starred Ideas</h2>
-        <button class="show-starred-ideas">Show Starred Ideas</button>
-      </div>
+        <button>Show Starred Ideas</button>
+      </section>
     </section>
-    <section class="main-content-box">
-      <form class="form-box">
-        <div class="form-group">
+    <section class="main-content">
+      <form class="form-container">
+        <div class="form">
           <label for="title">Title</label>
           <input type="text" id="title" title="title">
         </div>
-        <div class="form-group">
+        <div class="form">
           <label for="body">Body</label>
           <input type="text" id="body" body="body">
         </div>
-        <div class="form-group">
+        <div class="form">
           <button class="save-form-button" type="submit">Save</button>
         </div>
-        <div class="form-group">
+        <div class="form">
           <div class="search-bar">
             <button class="search-button">
               <img class="search-image" src="assets/search.svg" alt="">
@@ -42,11 +42,14 @@
           </div>
         </div>
       </form>
-      <div class="ideas-box">
+      <div class="card-container">
         <div class="idea-card" id="card-one">
-          <div class="idea-card-header"></div>
-          <div class="idea-card-body"></div>
-          <div class="idea-card-footer"></div>
+          <header class="idea-card-header"></header>
+          <div class="idea-card-body">
+            <h3>Idea Title</h3>
+            <p>Idea body. Don't ever play yourself. Every chance I get, I water the plants, Lion! Cloth talk.</p>
+          </div>
+          <footer class="idea-card-footer"></footer>
         </div>
       </div>
     </section>
