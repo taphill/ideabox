@@ -21,6 +21,7 @@ function saveIdea() {
 
   ideas.push(idea)
   displayIdeas()
+  addIdeaEventListeners()
   form.reset()
 }
 
@@ -35,8 +36,19 @@ function changeButtonStatus() {
   }
 }
 
+function deleteIdea(event) {
+  console.log('Click')
+  let id = event.path[2].id
+  let index = ideas.findIndex(idea => idea.id === id)
+
+  ideas.splice(index, 1)
+  displayIdeas()
+}
+
 // Helper functions
 function displayIdeas() {
+  cardContainer.innerHTML = ''
+
   ideas.forEach(idea => {
     const elementExists = document.getElementById(`${idea.id}`) 
 
@@ -45,8 +57,8 @@ function displayIdeas() {
     cardContainer.innerHTML += `
       <div class="idea-card" id="${idea.id}">
         <header class="idea-card-header">
-          <img src="assets/star.svg" alt="">
-          <img src="assets/delete.svg" alt="">
+          <img class="star-idea" src="assets/star.svg" alt="">
+          <img class="delete-idea" src="assets/delete.svg" alt="">
         </header>
         <div class="idea-card-body">
           <h3>${idea.title}</h3>
@@ -58,6 +70,12 @@ function displayIdeas() {
         </footer>
       </div>
     `
+  })
+}
+
+function addIdeaEventListeners() {
+  document.querySelectorAll('.delete-idea').forEach(item => {
+    item.addEventListener('click', deleteIdea)
   })
 }
 
