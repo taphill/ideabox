@@ -28,7 +28,8 @@
         </div>
         <div class="form">
           <label for="body">Body</label>
-          <input type="text" id="body" body="body">
+          <!-- <input type="text" id="body" body="body"> -->
+          <textarea name="body" id="" cols="30" rows="10"></textarea>
         </div>
         <div class="form">
           <button class="save-form-button" type="submit">Save</button>
@@ -44,12 +45,18 @@
       </form>
       <div class="card-container">
         <div class="idea-card" id="card-one">
-          <header class="idea-card-header"></header>
+          <header class="idea-card-header">
+            <img src="assets/star.svg" alt="">
+            <img src="assets/delete.svg" alt="">
+          </header>
           <div class="idea-card-body">
             <h3>Idea Title</h3>
             <p>Idea body. Don't ever play yourself. Every chance I get, I water the plants, Lion! Cloth talk.</p>
           </div>
-          <footer class="idea-card-footer"></footer>
+          <footer class="idea-card-footer">
+            <img src="assets/comment.svg" alt="">
+            <p>Comment</p>
+          </footer>
         </div>
       </div>
     </section>
