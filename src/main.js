@@ -2,21 +2,25 @@
 let ideas = JSON.parse(localStorage.getItem('ideas')) || []
 let titleHasInput = false 
 let bodyHasInput = false 
+let filterEnabled = false
 
 // DOM elements
-const showStarredButton = document.querySelector('.filter-ideas button')
+const filterButton = document.querySelector('.filter-ideas button')
 const form = document.querySelector('form')
 const title = document.querySelector('input#title')
 const body = document.querySelector('textarea#body')
 const saveButton = document.querySelector('.save-idea-button')
+const searchInput = document.querySelector('#search')
 const cardContainer = document.querySelector('.card-container')
 
 // Event listeners
-document.addEventListener('DOMContentLoaded', displayIdeas);
-showStarredButton.addEventListener('click', displayStarredIdeas)
+document.addEventListener('DOMContentLoaded', displayAllIdeas);
+filterButton.addEventListener('click', toggleFilter)
 saveButton.addEventListener('click', saveIdea)
 title.addEventListener('input', changeButtonStatus)
 body.addEventListener('input', changeButtonStatus)
+searchInput.addEventListener('change', displayMatchedIdeas)
+searchInput.addEventListener('keyup', displayMatchedIdeas)
 
 cardContainer.addEventListener('click', event => {
   if (event.target.className === 'delete-idea') {
@@ -32,7 +36,7 @@ function saveIdea() {
 
   ideas.push(idea)
   updateLocalStorage()
-  displayIdeas()
+  displayAllIdeas()
   form.reset()
 }
 
@@ -53,7 +57,7 @@ function deleteIdea(event) {
 
   ideas.splice(index, 1)
   updateLocalStorage()
-  displayIdeas()
+  displayAllIdeas()
 }
 
 function toggleStar(event) {
@@ -65,55 +69,66 @@ function toggleStar(event) {
   changeStarImage(idea, event.target)
 }
 
-function displayIdeas() {
-  cardContainer.innerHTML = ''
+function toggleFilter() {
+  filterEnabled = !filterEnabled
 
-  ideas.forEach(idea => {
-    cardContainer.innerHTML += `
-      <div class="idea-card" id="${idea.id}">
-        <header class="idea-card-header">
-          ${chooseStarImage(idea)}
-          <img class="delete-idea" src="assets/delete.svg" alt="">
-        </header>
-        <div class="idea-card-body">
-          <h3>${idea.title}</h3>
-          <p>${idea.body}</p>
-        </div>
-        <footer class="idea-card-footer">
-          <img src="assets/comment.svg" alt="">
-          <p>Comment</p>
-        </footer>
-      </div>
-    `
-  })
+  if (filterEnabled) {
+    filterButton.textContent = 'Show All Ideas' 
+    displayStarredIdeas()
+  } else {
+    filterButton.textContent = 'Show Starred Ideas' 
+    displayAllIdeas()
+  }
+}
+
+function displayAllIdeas() {
+  const html = ideas.map(idea => cardComponent(idea)).join('')
+
+  cardContainer.innerHTML = html
 }
 
 function displayStarredIdeas() {
-  cardContainer.innerHTML = ''
+  const html = ideas.map(idea => {
+    if (idea.star) { return cardComponent(idea) }
+  }).join('')
 
-  ideas.forEach(idea => {
-    if (!idea.star) { return }
+  cardContainer.innerHTML = html
+}
 
-    cardContainer.innerHTML += `
-      <div class="idea-card" id="${idea.id}">
-        <header class="idea-card-header">
-          ${chooseStarImage(idea)}
-          <img class="delete-idea" src="assets/delete.svg" alt="">
-        </header>
-        <div class="idea-card-body">
-          <h3>${idea.title}</h3>
-          <p>${idea.body}</p>
-        </div>
-        <footer class="idea-card-footer">
-          <img src="assets/comment.svg" alt="">
-          <p>Comment</p>
-        </footer>
-      </div>
-    `
-  })
+function displayMatchedIdeas() {
+  const matches = findMatches(this.value, ideas)
+  const html = matches.map(idea => cardComponent(idea)).join('')
+
+  cardContainer.innerHTML = html
 }
 
 // Helper functions
+function cardComponent(idea) {
+  return `
+    <div class="idea-card" id="${idea.id}">
+      <header class="idea-card-header">
+        ${chooseStarImage(idea)}
+        <img class="delete-idea" src="assets/delete.svg" alt="">
+      </header>
+      <div class="idea-card-body">
+        <h3>${idea.title}</h3>
+        <p>${idea.body}</p>
+      </div>
+      <footer class="idea-card-footer">
+        <img src="assets/comment.svg" alt="">
+        <p>Comment</p>
+      </footer>
+    </div>
+  `
+}
+
+function findMatches(wordToMatch, ideas) {
+  return ideas.filter(idea => {
+    const regex = new RegExp(wordToMatch, 'gi')
+    return idea.title.match(regex) || idea.body.match(regex)
+  })
+}
+
 function updateLocalStorage() {
   const ideasJSON = JSON.stringify(ideas)
 

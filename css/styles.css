@@ -80,6 +80,7 @@ textarea {
   font-size: 2rem;
   color: #e9e9f3;
   background-color: #5356a4;
+  min-width: 20rem;
 }
 
 
