@@ -15,13 +15,20 @@ saveButton.addEventListener('click', saveIdea)
 title.addEventListener('input', changeButtonStatus)
 body.addEventListener('input', changeButtonStatus)
 
+cardContainer.addEventListener('click', event => {
+  if (event.target.className === 'delete-idea') {
+    deleteIdea(event)
+  } else if (event.target.className === 'star-idea') {
+    toggleStar(event)
+  }
+})
+
 // Handlers
 function saveIdea() {
   const idea = new Idea(title.value, body.value)
 
   ideas.push(idea)
   displayIdeas()
-  addIdeaEventListeners()
   form.reset()
 }
 
@@ -37,12 +44,19 @@ function changeButtonStatus() {
 }
 
 function deleteIdea(event) {
-  console.log('Click')
-  let id = event.path[2].id
-  let index = ideas.findIndex(idea => idea.id === id)
+  const id = event.path[2].id
+  const index = ideas.findIndex(idea => idea.id === id)
 
   ideas.splice(index, 1)
   displayIdeas()
+}
+
+function toggleStar(event) {
+  const id = event.path[2].id
+  const idea = ideas.find(idea => idea.id === id)
+
+  idea.star = !idea.star
+  changeStarImage(idea, event.target)
 }
 
 // Helper functions
@@ -50,14 +64,10 @@ function displayIdeas() {
   cardContainer.innerHTML = ''
 
   ideas.forEach(idea => {
-    const elementExists = document.getElementById(`${idea.id}`) 
-
-    if(elementExists) { return }
-
     cardContainer.innerHTML += `
       <div class="idea-card" id="${idea.id}">
         <header class="idea-card-header">
-          <img class="star-idea" src="assets/star.svg" alt="">
+          ${chooseStarImage(idea)}
           <img class="delete-idea" src="assets/delete.svg" alt="">
         </header>
         <div class="idea-card-body">
@@ -73,10 +83,20 @@ function displayIdeas() {
   })
 }
 
-function addIdeaEventListeners() {
-  document.querySelectorAll('.delete-idea').forEach(item => {
-    item.addEventListener('click', deleteIdea)
-  })
+function changeStarImage(idea, target) {
+  if (idea.star) {
+    target.src = 'assets/star-active.svg'
+  } else {
+    target.src = 'assets/star.svg'
+  }
+}
+
+function chooseStarImage(idea) {
+  if (idea.star) {
+    return '<img class="star-idea" src="assets/star-active.svg" alt="">'
+  } else {
+    return '<img class="star-idea" src="assets/star.svg" alt="">'
+  }
 }
 
 function setTitleHasInput() {
