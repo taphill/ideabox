@@ -1,9 +1,10 @@
 // Variables
-let ideas = []
+let ideas = JSON.parse(localStorage.getItem('ideas')) || []
 let titleHasInput = false 
 let bodyHasInput = false 
 
 // DOM elements
+const showStarredButton = document.querySelector('.filter-ideas button')
 const form = document.querySelector('form')
 const title = document.querySelector('input#title')
 const body = document.querySelector('textarea#body')
@@ -11,6 +12,8 @@ const saveButton = document.querySelector('.save-idea-button')
 const cardContainer = document.querySelector('.card-container')
 
 // Event listeners
+document.addEventListener('DOMContentLoaded', displayIdeas);
+showStarredButton.addEventListener('click', displayStarredIdeas)
 saveButton.addEventListener('click', saveIdea)
 title.addEventListener('input', changeButtonStatus)
 body.addEventListener('input', changeButtonStatus)
@@ -28,6 +31,7 @@ function saveIdea() {
   const idea = new Idea(title.value, body.value)
 
   ideas.push(idea)
+  updateLocalStorage()
   displayIdeas()
   form.reset()
 }
@@ -48,6 +52,7 @@ function deleteIdea(event) {
   const index = ideas.findIndex(idea => idea.id === id)
 
   ideas.splice(index, 1)
+  updateLocalStorage()
   displayIdeas()
 }
 
@@ -56,10 +61,10 @@ function toggleStar(event) {
   const idea = ideas.find(idea => idea.id === id)
 
   idea.star = !idea.star
+  updateLocalStorage()
   changeStarImage(idea, event.target)
 }
 
-// Helper functions
 function displayIdeas() {
   cardContainer.innerHTML = ''
 
@@ -81,6 +86,39 @@ function displayIdeas() {
       </div>
     `
   })
+}
+
+function displayStarredIdeas() {
+  cardContainer.innerHTML = ''
+
+  ideas.forEach(idea => {
+    if (!idea.star) { return }
+
+    cardContainer.innerHTML += `
+      <div class="idea-card" id="${idea.id}">
+        <header class="idea-card-header">
+          ${chooseStarImage(idea)}
+          <img class="delete-idea" src="assets/delete.svg" alt="">
+        </header>
+        <div class="idea-card-body">
+          <h3>${idea.title}</h3>
+          <p>${idea.body}</p>
+        </div>
+        <footer class="idea-card-footer">
+          <img src="assets/comment.svg" alt="">
+          <p>Comment</p>
+        </footer>
+      </div>
+    `
+  })
+}
+
+// Helper functions
+function updateLocalStorage() {
+  const ideasJSON = JSON.stringify(ideas)
+
+  localStorage.removeItem('ideas')
+  localStorage.setItem('ideas', ideasJSON)
 }
 
 function changeStarImage(idea, target) {
