@@ -27,6 +27,7 @@ body.addEventListener('input', changeFormButtonStatus)
 comment.addEventListener('input', changeAddCommentButtonStatus)
 searchInput.addEventListener('change', displayMatchedIdeas)
 searchInput.addEventListener('keyup', displayMatchedIdeas)
+saveCommentButton.addEventListener('click', addComment)
 cancelCommentButton.addEventListener('click', () => commentForm.style.display = 'none')
 
 cardContainer.addEventListener('click', event => {
@@ -35,7 +36,7 @@ cardContainer.addEventListener('click', event => {
   } else if (event.target.className === 'star-idea') {
     toggleStar(event)
   } else if (event.target.className === 'comment-idea') {
-    addComment(event)
+    commentForm.style.display = 'block'
   }
 })
 
@@ -68,8 +69,12 @@ function toggleStar(event) {
 }
 
 function addComment(event) {
-  console.log('it works')
-  commentForm.style.display = 'block'
+  console.log(event)
+  const id = event.path[2].id
+  console.log(id)
+  // const idea = ideas.find(idea => idea.id === id)
+  // const newComment = new Comment(comment.value)
+  // console.log(idea)
 }
 
 function changeFormButtonStatus() {
@@ -77,7 +82,7 @@ function changeFormButtonStatus() {
   setBodyHasInput()
 
   if (titleHasInput && bodyHasInput) {
-    comm.disabled = false
+    saveButton.disabled = false
   } else {
     saveButton.disabled = true
   }
