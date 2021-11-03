@@ -4,18 +4,11 @@ class Idea {
     this.title = title
     this.body = body
     this.star = false
+    this.comments = []
   }
 
-  saveToStorage() {
-
-  }
-
-  deleteFromStorage() {
-
-  }
-
-  updateIdea() {
-
+  addComment(comment) {
+    this.comments.push(comment)
   }
 
   #generateUniqueID() {

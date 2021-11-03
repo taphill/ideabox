@@ -2,6 +2,7 @@
 let ideas = JSON.parse(localStorage.getItem('ideas')) || []
 let titleHasInput = false 
 let bodyHasInput = false 
+let commentHasInput = false
 let filterEnabled = false
 
 // DOM elements
@@ -9,24 +10,32 @@ const filterButton = document.querySelector('.filter-ideas button')
 const form = document.querySelector('form')
 const title = document.querySelector('input#title')
 const body = document.querySelector('textarea#body')
+const comment = document.querySelector('textarea#comment')
 const saveButton = document.querySelector('.save-idea-button')
 const searchInput = document.querySelector('#search')
 const cardContainer = document.querySelector('.card-container')
+const commentForm = document.querySelector('.comment-container')
+const saveCommentButton = document.querySelector('.save-comment-button')
+const cancelCommentButton = document.querySelector('.cancel-comment-button')
 
 // Event listeners
 document.addEventListener('DOMContentLoaded', displayAllIdeas);
 filterButton.addEventListener('click', toggleFilter)
 saveButton.addEventListener('click', saveIdea)
-title.addEventListener('input', changeButtonStatus)
-body.addEventListener('input', changeButtonStatus)
+title.addEventListener('input', changeFormButtonStatus)
+body.addEventListener('input', changeFormButtonStatus)
+comment.addEventListener('input', changeAddCommentButtonStatus)
 searchInput.addEventListener('change', displayMatchedIdeas)
 searchInput.addEventListener('keyup', displayMatchedIdeas)
+cancelCommentButton.addEventListener('click', () => commentForm.style.display = 'none')
 
 cardContainer.addEventListener('click', event => {
   if (event.target.className === 'delete-idea') {
     deleteIdea(event)
   } else if (event.target.className === 'star-idea') {
     toggleStar(event)
+  } else if (event.target.className === 'comment-idea') {
+    addComment(event)
   }
 })
 
@@ -34,21 +43,10 @@ cardContainer.addEventListener('click', event => {
 function saveIdea() {
   const idea = new Idea(title.value, body.value)
 
+  form.reset()
   ideas.push(idea)
   updateLocalStorage()
   displayAllIdeas()
-  form.reset()
-}
-
-function changeButtonStatus() {
-  setTitleHasInput()
-  setBodyHasInput()
-
-  if (titleHasInput && bodyHasInput) {
-    saveButton.disabled = false
-  } else {
-    saveButton.disabled = true
-  }
 }
 
 function deleteIdea(event) {
@@ -67,6 +65,32 @@ function toggleStar(event) {
   idea.star = !idea.star
   updateLocalStorage()
   changeStarImage(idea, event.target)
+}
+
+function addComment(event) {
+  console.log('it works')
+  commentForm.style.display = 'block'
+}
+
+function changeFormButtonStatus() {
+  setTitleHasInput()
+  setBodyHasInput()
+
+  if (titleHasInput && bodyHasInput) {
+    comm.disabled = false
+  } else {
+    saveButton.disabled = true
+  }
+}
+
+function changeAddCommentButtonStatus() {
+  setCommentHasInput()
+
+  if (commentHasInput) {
+    saveCommentButton.disabled = false
+  } else {
+    saveCommentButton.disabled = true
+  }
 }
 
 function toggleFilter() {
@@ -115,9 +139,12 @@ function cardComponent(idea) {
         <p>${idea.body}</p>
       </div>
       <footer class="idea-card-footer">
-        <img src="assets/comment.svg" alt="">
+        <img class="comment-idea" src="assets/comment.svg" alt="">
         <p>Comment</p>
       </footer>
+      <div class="idea-card-comments">
+        <button type="button">View Comments</button>
+      </div>
     </div>
   `
 }
@@ -132,7 +159,6 @@ function findMatches(wordToMatch, ideas) {
 function updateLocalStorage() {
   const ideasJSON = JSON.stringify(ideas)
 
-  localStorage.removeItem('ideas')
   localStorage.setItem('ideas', ideasJSON)
 }
 
@@ -165,5 +191,13 @@ function setBodyHasInput() {
     bodyHasInput = false 
   } else {
     bodyHasInput = true
+  }
+}
+
+function setCommentHasInput() {
+  if (comment.value === '') {
+    commentHasInput = false 
+  } else {
+    commentHasInput = true
   }
 }

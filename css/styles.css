@@ -19,6 +19,11 @@ button {
   border-radius: 0.2rem;
 }
 
+img:hover,
+button:hover {
+  cursor: pointer;
+}
+
 label {
   display: block;
   margin-bottom: 0.5rem;
@@ -113,7 +118,6 @@ textarea {
 
 .form {
   width: 50%;
-  /* border: 4px solid red; */
 }
 
 .form > button {
@@ -145,6 +149,11 @@ textarea {
   border: initial;
   border-radius: initial;
   background-color: #1f1f3d;
+  cursor: default;
+}
+
+.search-bar > button > img {
+  cursor: default;
 }
 
 .search-bar > input {
@@ -163,6 +172,7 @@ textarea {
 /* || CARDS */
 
 .idea-card {
+  box-sizing: border-box;
   display: flex;
   flex-direction: column;
   width: 12rem;
@@ -214,4 +224,61 @@ textarea {
 
 .idea-card > footer > p {
   color: #eaeaf4;
+}
+
+.idea-card-comments {
+  border-top: 2px solid black;
+}
+
+.idea-card-comments > button {
+  width: 82%;
+  margin: 1rem;
+  padding: 0.5rem;
+}
+
+
+/* || COMMENT FORM POP UP */
+
+.comment-container {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
+}
+
+.comment-form {
+  margin: 20% auto;
+  padding: 2rem;
+  width: 50%;
+  border: 0.2rem solid black;
+  border-radius: 1rem;
+  box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.2), 0 7px 20px 0 rgba(0, 0, 0, 0.2);
+  background-color: #eaeaf4;
+}
+
+.comment-form > div > button {
+  font-size: 1.5rem;
+  font-weight: bold;
+  width: 100%;
+  height: 3rem;
+  margin-bottom: 1.5rem;
+  color: #eaeaf4;
+}
+
+.comment-form > div > button:disabled {
+  cursor: not-allowed;
+  color: black;
+  background-color: grey;
+}
+
+.save-comment-button {
+  background-color: #1f1f3d;
+}
+
+.cancel-comment-button {
+  background-color: red;
 }
