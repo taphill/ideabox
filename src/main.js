@@ -27,7 +27,6 @@ body.addEventListener('input', changeFormButtonStatus)
 comment.addEventListener('input', changeAddCommentButtonStatus)
 searchInput.addEventListener('change', displayMatchedIdeas)
 searchInput.addEventListener('keyup', displayMatchedIdeas)
-saveCommentButton.addEventListener('click', addComment)
 cancelCommentButton.addEventListener('click', () => commentForm.style.display = 'none')
 
 cardContainer.addEventListener('click', event => {
@@ -36,7 +35,7 @@ cardContainer.addEventListener('click', event => {
   } else if (event.target.className === 'star-idea') {
     toggleStar(event)
   } else if (event.target.className === 'comment-idea') {
-    commentForm.style.display = 'block'
+    displayCommentFrom(event)
   }
 })
 
@@ -66,15 +65,6 @@ function toggleStar(event) {
   idea.star = !idea.star
   updateLocalStorage()
   changeStarImage(idea, event.target)
-}
-
-function addComment(event) {
-  console.log(event)
-  const id = event.path[2].id
-  console.log(id)
-  // const idea = ideas.find(idea => idea.id === id)
-  // const newComment = new Comment(comment.value)
-  // console.log(idea)
 }
 
 function changeFormButtonStatus() {
@@ -129,6 +119,19 @@ function displayMatchedIdeas() {
   const html = matches.map(idea => cardComponent(idea)).join('')
 
   cardContainer.innerHTML = html
+}
+
+function displayCommentFrom(event) {
+  const id = event.path[2].id
+  const idea = ideas.find(idea => idea.id === id)
+
+  commentForm.style.display = 'block'
+
+  saveCommentButton.addEventListener('click', () => {
+    idea.comments.push(comment.value)
+    updateLocalStorage()
+    comment.value = ''
+  })
 }
 
 // Helper functions
